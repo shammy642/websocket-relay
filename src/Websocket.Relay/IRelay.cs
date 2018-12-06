@@ -4,6 +4,6 @@ namespace Websocket.Relay
 {
     public interface IRelay
     {
-        Task Run(RunMode mode);
+        Task Run(int port, RunMode mode);
     }
 }
