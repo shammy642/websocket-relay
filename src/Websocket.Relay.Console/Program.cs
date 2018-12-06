@@ -1,4 +1,7 @@
-﻿namespace Websocket.Relay.Console
+﻿using CommandLine;
+using System.Threading.Tasks;
+
+namespace Websocket.Relay.Console
 {
     public class Program
     {
