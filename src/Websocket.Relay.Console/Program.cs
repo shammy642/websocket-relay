@@ -1,8 +1,4 @@
-﻿using CommandLine;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Fadecandy.Relay.Console
+﻿namespace Websocket.Relay.Console
 {
     public class Program
     {

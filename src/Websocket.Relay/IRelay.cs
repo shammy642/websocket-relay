@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Fadecandy.Relay
+namespace Websocket.Relay
 {
     public interface IRelay
     {

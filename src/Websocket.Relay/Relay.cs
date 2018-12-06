@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
 
-namespace Fadecandy.Relay
+namespace Websocket.Relay
 {
     public class Relay : IRelay
     {
@@ -21,7 +21,7 @@ namespace Fadecandy.Relay
 
         public async Task Run(RunMode mode)
         {
-            await logger.Info($"Starting Fadecandy websocket relay in {mode.ToString()} mode");
+            await logger.Info($"Starting websocket relay in {mode.ToString()} mode");
 
             // TODO: Implement server
         }

@@ -1,4 +1,4 @@
-﻿namespace Fadecandy.Relay
+﻿namespace Websocket.Relay
 {
     public enum RunMode
     {

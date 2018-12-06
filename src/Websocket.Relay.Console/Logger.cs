@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Fadecandy.Relay.Console
+namespace Websocket.Relay.Console
 {
     public class Logger : ILogger
     {
