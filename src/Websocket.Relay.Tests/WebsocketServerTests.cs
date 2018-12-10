@@ -15,14 +15,16 @@ namespace Websocket.Relay.Tests
             var relay = Relay.Load(messageCollector);
             await relay.Run(7890, RunMode.Test);
 
-            var ws = new WebSocket("ws://localhost:7890");
-            ws.Connect();
+            using (var ws = new WebSocket("ws://localhost:7890"))
+            {
+                ws.Connect();
 
-            Thread.Sleep(100);
+                Thread.Sleep(100);
 
-            Assert.Contains("pulse", messageCollector.Messages
-                .Aggregate((prev, curr) => prev + curr)
-                .ToLowerInvariant());
+                Assert.Contains("pulse", messageCollector.Messages
+                    .Aggregate((prev, curr) => prev + curr)
+                    .ToLowerInvariant());
+            }
         }
     }
 }
