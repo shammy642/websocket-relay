@@ -18,7 +18,7 @@ namespace Websocket.Relay.Tests
             var ws = new WebSocket("ws://localhost:7890");
             ws.Connect();
 
-            Thread.Sleep(10000);
+            Thread.Sleep(100);
 
             Assert.Contains("pulse", messageCollector.Messages
                 .Aggregate((prev, curr) => prev + curr)
