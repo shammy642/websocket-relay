@@ -16,6 +16,7 @@ namespace Websocket.Relay.Tests
 
         public async Task Info(string message)
         {
+            await Task.Yield();
             _messages.Add(message);
         }
     }
