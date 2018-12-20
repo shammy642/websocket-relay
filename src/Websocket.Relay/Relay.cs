@@ -8,14 +8,17 @@ namespace Websocket.Relay
     {
         private readonly ILogger logger;
 
-        public static IRelay Load(ILogger logger)
+        public static IRelay Load(ILogger logger, RelayConfiguration configuration)
         {
             // TODO: Initialize dependencies
-            return new Relay(logger);
+            return new Relay(logger, configuration);
         }
 
-        private Relay(ILogger logger)
+        readonly RelayConfiguration configuration;
+
+        private Relay(ILogger logger, RelayConfiguration configuration)
         {
+            this.configuration = configuration;
             this.logger = logger;
         }
 
@@ -29,11 +32,19 @@ namespace Websocket.Relay
             {
                 case RunMode.Test:
                     websocketServer.AddWebSocketService<PulseOnConnectionWebsocketBehaviour>(
-                        "/", x => x.SetLogger(this.logger));
+                        "/", x => 
+                        {
+                            x.SetLogger(this.logger);
+                            x.SetMaxFramesPerSecond(configuration.MaxFramesPerSecond);
+                        });
                     break;
                 default:
                     websocketServer.AddWebSocketService<RelayWebsocketBehaviour>(
-                        "/", x => x.SetLogger(this.logger));
+                        "/", x =>
+                        {
+                            x.SetLogger(this.logger);
+                            x.SetMaxFramesPerSecond(configuration.MaxFramesPerSecond);
+                        });
                     break;
             }
 

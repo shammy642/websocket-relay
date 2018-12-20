@@ -12,7 +12,7 @@ namespace Websocket.Relay.Tests
         public async Task WebsocketRelay_WhenInTestMode_SendsMessagesRegardingPulses()
         {
             var messageCollector = new MessageCollector();
-            var relay = Relay.Load(messageCollector);
+            var relay = Relay.Load(messageCollector, RelayConfiguration.Default);
             await relay.Run(7890, RunMode.Test);
 
             using (var ws = new WebSocket("ws://localhost:7890"))

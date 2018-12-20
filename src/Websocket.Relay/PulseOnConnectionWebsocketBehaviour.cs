@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebSocketSharp.Server;
 
@@ -11,6 +12,7 @@ namespace Websocket.Relay
         private static Object _lock;
         private bool _testHasBegun;
         private ILogger logger;
+        private Limiter limiter;
 
         static PulseOnConnectionWebsocketBehaviour()
         {
@@ -20,11 +22,23 @@ namespace Websocket.Relay
         public PulseOnConnectionWebsocketBehaviour()
         {
             _testHasBegun = false;
+
+            limiter = new Limiter(60); // Default max frames per second;
         }
 
         public void SetLogger(ILogger logger)
         {
             this.logger = logger;
+        }
+
+        public void SetMaxFramesPerSecond(double maxFramesPerSecond)
+        {
+            if (maxFramesPerSecond < 15 || maxFramesPerSecond > 120)
+            {
+                throw new ArgumentException("Frames per second should be between 15 and 120 inclusive");
+            }
+
+            this.limiter = new Limiter(maxFramesPerSecond);
         }
 
         protected override void OnOpen()
@@ -42,7 +56,7 @@ namespace Websocket.Relay
 
                 SendBinaryPulseForXSeconds(10, 0.5)
                     .GetAwaiter()
-                    .GetResult();;
+                    .GetResult();
             }
         }
 
@@ -66,8 +80,9 @@ namespace Websocket.Relay
 
                 isOn = shouldBeOn;
 
-                var pulse = ConstructPulse(999, true);
-                Sessions.BroadcastAsync(pulse, null);
+                var pulse = ConstructPulse(30, isOn);
+
+                limiter.Limit(() => Sessions.Broadcast(pulse));
             }
 
             stopwatch.Stop();
