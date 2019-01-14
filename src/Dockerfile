@@ -12,4 +12,4 @@ RUN dotnet publish -c Release -o out
 
 FROM microsoft/dotnet:2.1-runtime-stretch-slim-arm32v7 AS runtime
 WORKDIR /app
-ENTRYPOINT ["dotnet", "websocket.relay.console/out/websocket.relay.console.dll"]
+ENTRYPOINT ["dotnet", "websocket.relay.console/out/Websocket.Relay.Console.dll"]
