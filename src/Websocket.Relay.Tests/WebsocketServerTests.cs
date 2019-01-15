@@ -19,7 +19,10 @@ namespace Websocket.Relay.Tests
             {
                 ws.Connect();
 
-                Thread.Sleep(100);
+                while (messageCollector.Messages.Count() < 3)
+                {
+                    Thread.Sleep(100);
+                }
 
                 Assert.Contains("pulse", messageCollector.Messages
                     .Aggregate((prev, curr) => prev + curr)

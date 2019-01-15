@@ -10,6 +10,6 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-FROM microsoft/dotnet:2.1-runtime-stretch-slim-arm32v7 AS runtime
+FROM microsoft/dotnet:2.1 AS runtime
 WORKDIR /app
 ENTRYPOINT ["dotnet", "websocket.relay.console/out/Websocket.Relay.Console.dll"]
