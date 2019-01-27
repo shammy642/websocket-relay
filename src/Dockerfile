@@ -1,6 +1,3 @@
-FROM arm32v7/debian:stretch-slim 
-COPY qemu-arm-static /usr/bin
-
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /app
 EXPOSE 7890
