@@ -2,6 +2,9 @@ FROM microsoft/dotnet:2.1-sdk-stretch-arm32v7 AS build
 WORKDIR /app
 EXPOSE 7890
 
+FROM arm32v7/debian:stretch-slim 
+COPY qemu-arm-static /usr/bin
+
 # copy csproj and restore as distinct layers
 COPY Websocket.Relay.Console/*.csproj ./Websocket.Relay.Console/
 COPY Websocket.Relay/*.csproj ./Websocket.Relay/
