@@ -24,7 +24,7 @@ namespace Websocket.Relay
 
         public async Task Run(int port, RunMode mode)
         {
-            await logger.Info($"Starting websocket relay in {mode.ToString()} mode on port {port.ToString()}");
+            await logger.Info($"Starting websocket relay relay relay relay in {mode.ToString()} mode on port {port.ToString()}");
 
             var websocketServer = new WebSocketServer(port);
 
